@@ -1,0 +1,20 @@
+{
+  "name": "My Custom PWA",
+  "short_name": "PWA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f05526",
+  "icons": [
+    {
+      "src": "/images/images/logos/1.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/images/logos/splash.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
