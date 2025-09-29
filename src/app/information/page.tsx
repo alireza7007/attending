@@ -1,4 +1,3 @@
-'use client'
 import React from 'react'
 import Tobbar from '../_components/Tobbar'
 import CompanyLogoPicker from '../_components/CompanyLogoPicker'

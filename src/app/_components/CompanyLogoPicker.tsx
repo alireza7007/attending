@@ -23,12 +23,16 @@ const CompanyLogoPicker = () => {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setLogoUri(url);
-    }
-  };
+  const file = e.target.files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setLogoUri(reader.result as string); // Base64
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
 
   const handleConfirm = () => {
     if (!companyName.trim() || !logoUri) {

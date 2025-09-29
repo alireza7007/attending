@@ -1,16 +1,18 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import UserLoc from "../_components/UserLoc";
+import AcceptInOutTimeButton from "../_components/attendScreenCm/AcceptInOutTimeButton";
 
-const PolygonPreviewMap = dynamic(() => import("../_components/UserLoc"), {
+
+const UserLocation = dynamic(() => import("../_components/UserLoc"), {
   ssr: false,
 });
 
 export default function AttendPage() {
   return (
     <div className="w-full h-[600px]">
-      <PolygonPreviewMap />
+      <UserLocation />
+      <AcceptInOutTimeButton />
     </div>
   );
 }

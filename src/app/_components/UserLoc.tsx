@@ -53,7 +53,7 @@ export default function UserLoc() {
 
     mapInstanceRef.current = L.map(mapRef.current, {
       center: [35.6895, 51.3890],
-      zoom: 16,
+      zoom: 18,
       zoomControl: true,
     });
 
@@ -86,17 +86,26 @@ export default function UserLoc() {
   }, []);
 
   // آپدیت polygon وقتی coords تغییر میکنه
-  useEffect(() => {
-    if (!mapInstanceRef.current) return;
-    if (polygonRef.current) mapInstanceRef.current.removeLayer(polygonRef.current);
+// آپدیت polygon وقتی coords تغییر میکنه
+useEffect(() => {
+  if (!mapInstanceRef.current) return;
+  if (polygonRef.current) mapInstanceRef.current.removeLayer(polygonRef.current);
 
-    if (polygonCoords.length > 0) {
-      polygonRef.current = L.polygon(
-        polygonCoords.map((p: { latitude: number; longitude: number }) => [p.latitude, p.longitude]),
-        { color: "blue", fillColor: "#3b82f6", fillOpacity: 0.3 }
-      ).addTo(mapInstanceRef.current);
+  if (Array.isArray(polygonCoords) && polygonCoords.length > 0) {
+    const latlngs = polygonCoords
+      .filter((p) => p && typeof p.latitude === "number" && typeof p.longitude === "number")
+      .map((p) => [p.latitude, p.longitude]) as [number, number][];
+
+    if (latlngs.length > 0) {
+      polygonRef.current = L.polygon(latlngs, {
+        color: "blue",
+        fillColor: "#3b82f6",
+        fillOpacity: 0.3,
+      }).addTo(mapInstanceRef.current);
     }
-  }, [polygonCoords]);
+  }
+}, [polygonCoords]);
+
 
   return <div ref={mapRef} className="w-full h-[600px] rounded-xl overflow-hidden shadow-md" />;
 }
